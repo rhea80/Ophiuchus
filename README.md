@@ -1,3 +1,3 @@
 # Ophiuchus
-- Betelgeuse: WIP
+- Betelgeuse: done
 - vega: done
