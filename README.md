@@ -5,9 +5,9 @@ Note: don't actually use these for real life, I made these for competitions in a
 
 ## Scripts
 ### Defensive Scripts
-- vega.bat
-- rigel.ps1
+- one-winged-angel.bat
+- spellbinder.ps1
 ### Offensive Scripts 
-- TBD
+- oathkeeper.py
 ### Misc 
-- Betelgeuse.py
+- kingdomkey.py
