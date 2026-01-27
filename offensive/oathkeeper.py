@@ -19,4 +19,4 @@ class pet():
     def update(self):
         self.window.after(10, self.update)
 
-pet()
+pet() 
