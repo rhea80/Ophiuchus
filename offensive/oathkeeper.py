@@ -1,22 +1,96 @@
 import tkinter as tk
+import random
 import time
+import pyautogui 
 
-class pet():
+class DesktopCat:
     def __init__(self):
         self.window = tk.Tk()
-        img = tk.PhotoImage(file='image.png')
-        self.window.config(highlightbackground='black')
+        
+        self.img_idle = tk.PhotoImage(file='image.png')
+        self.walk_right = tk.PhotoImage(file='walk_right.png')
+        self.walk_left = tk.PhotoImage(file='walk_left.png')
+        
         self.window.overrideredirect(True)
         self.window.attributes('-topmost', True)
-        self.window.wm_attributes('-transparentcolor', 'black')
-        self.label = tk.Label(self.window, bd=0, bg='black')
-        self.window.geometry('128x128+0+0')
-        self.label.configure(image=img)
-        self.label.pack()
-        self.window.after(0, self.update)
+        self.window.config(bg='black')
+        
+        self.dialects = [
+            "Meow!",   
+            "Add me on Linkedin: https://www.linkedin.com/in/rheasharma-cs/",   
+            "Chococat reigns supreme!",       
+            "Feed me a Monster please :3",    
+            "Find me if you can :3",     
+        ]
+        
+        screen_w = self.window.winfo_screenwidth()
+        screen_h = self.window.winfo_screenheight()
+        self.x, self.y = screen_w - 275, screen_h - 440 
+        
+        self.speech_bubble = tk.Label(self.window, bg='white', fg='black', font=('agave', 14, 'bold'), wraplength=200)
+        self.label = tk.Label(self.window, bd=0, bg='black', image=self.img_idle)
+        self.label.pack(side='bottom')
+        
+        self.state = "talking" 
+        self.last_switch_time = time.time()
+        self.current_dialect = random.choice(self.dialects)
+
+        self.update_behavior()
         self.window.mainloop()
 
-    def update(self):
-        self.window.after(10, self.update)
+    def update_behavior(self):
+        current_time = time.time()
+        
+        if current_time - self.last_switch_time > 60:
+            self.switch_to_new_state()
 
-pet() 
+        if self.state == "walking":
+            self.speech_bubble.pack_forget() 
+            self.walk_logic()
+        
+        elif self.state == "talking":
+            self.talk_logic()
+            
+        elif self.state == "snatch":
+            self.speech_bubble.pack_forget() 
+            self.snatch_logic()
+
+        self.window.after(20, self.update_behavior)
+
+    def switch_to_new_state(self, force_state=None):
+        self.last_switch_time = time.time()
+        self.state = force_state if force_state else random.choice(["walking", "talking", "snatch"])
+        self.current_dialect = random.choice(self.dialects)
+
+    def walk_logic(self):
+        self.x += 2
+        if self.x > (self.window.winfo_screenwidth() - 100): 
+            self.switch_to_new_state(force_state="talking")
+            return 
+
+        self.label.configure(image=self.walk_right)
+        self.window.geometry(f'+{self.x}+{self.y}')
+
+    def talk_logic(self):
+        self.label.configure(image=self.img_idle)
+        self.speech_bubble.configure(text=self.current_dialect)
+        if not self.speech_bubble.winfo_ismapped():
+            self.speech_bubble.pack(side='top', fill='x')
+        
+        self.window.geometry(f'+{self.x}+{self.y}')
+
+    def snatch_logic(self):
+        self.x += 3
+        if self.x > (self.window.winfo_screenwidth() - 100): 
+            self.switch_to_new_state(force_state="talking")
+            return
+
+        self.label.configure(image=self.walk_right)
+        self.window.geometry(f'+{self.x}+{self.y}')
+        pyautogui.moveTo(self.x + 50, self.y + 50) 
+        
+        if time.time() - self.last_switch_time > 10:
+            self.state = "walking"
+
+if __name__ == "__main__":
+    DesktopCat()
