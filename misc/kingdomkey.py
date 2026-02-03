@@ -14,7 +14,7 @@ DEFAULT_WORDS = [
 ]
 
 
-def generate_password(words: List[str], num_words: int = 3, digits: int = 2, symbols: int = 1, sep: str = "-") -> str:
+def generate_password(words: List[str], num_words: int = 5, digits: int = 4, symbols: int = 2, sep: str = "-") -> str:
     chosen = [secrets.choice(words).capitalize() for _ in range(num_words)]
     number = "".join(str(secrets.randbelow(10)) for _ in range(digits)) if digits > 0 else ""
     symbol_chars = "!@#$%^&*()-+="
@@ -24,7 +24,7 @@ def generate_password(words: List[str], num_words: int = 3, digits: int = 2, sym
 
 def generate_for_people(names: List[str], per_person: int, words: List[str], digits: int = 2, symbols: int = 1, sep: str = "-") -> Dict[str, List[str]]:
     return {
-        name: [generate_password(words, num_words=3, digits=digits, symbols=symbols, sep=sep) 
+        name: [generate_password(words, num_words=5, digits=digits, symbols=symbols, sep=sep) 
                for _ in range(per_person)] for name in names
     }
 
@@ -60,7 +60,7 @@ def export_passwords_pdf(passwords: Dict[str, List[str]], filename: str) -> None
     line_height = 14
 
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(margin, y, "MACCDC Passwords 2026")
+    c.drawString(margin, y, "ISTS Passwords 2026")
     y -= 1.5 * line_height
 
     for person, pwds in passwords.items():
