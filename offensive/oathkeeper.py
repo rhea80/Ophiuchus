@@ -7,20 +7,19 @@ class DesktopCat:
     def __init__(self):
         self.window = tk.Tk()
         
-        self.img_idle = tk.PhotoImage(file='image.png')
-        self.walk_right = tk.PhotoImage(file='walk_right.png')
-        self.walk_left = tk.PhotoImage(file='walk_left.png')
+        self.img_idle = tk.PhotoImage(file='offensive/images/front.png')
+        self.walk_right = tk.PhotoImage(file='offensive/images/left.png')
+        self.walk_left = tk.PhotoImage(file='offensive/images/right.png')
         
         self.window.overrideredirect(True)
-        self.window.attributes('-topmost', True)
-        self.window.config(bg='black')
-        
+        self.window.attributes('-topmost', True)        
         self.dialects = [
             "Meow!",   
             "Add me on Linkedin: https://www.linkedin.com/in/rheasharma-cs/",   
             "Chococat reigns supreme!",       
             "Feed me a Monster please :3",    
-            "Find me if you can :3",     
+            "Find me if you can :3",
+            "let me download your malware on my computer 🥺"
         ]
         
         screen_w = self.window.winfo_screenwidth()
