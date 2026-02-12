@@ -1,0 +1,1 @@
+nmap -Pn -sV -sC -O -p- -T4 --min-rate=10000 -oX scan.xml
