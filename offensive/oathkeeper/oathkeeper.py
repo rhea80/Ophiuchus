@@ -3,6 +3,8 @@ import random
 import time
 import pyautogui 
 
+## TO DO: refactor to ps? or bat? or c? --> then add in the walking and images with the popups, also add in image popups for random things + start making a key wonky
+
 class DesktopCat:
     def __init__(self):
         self.window = tk.Tk()
