@@ -17,7 +17,8 @@ class DesktopCat:
             "Meow!",   
             "Add me on Linkedin: https://www.linkedin.com/in/rheasharma-cs/",   
             "Chococat reigns supreme!",       
-            "Feed me a Monster please :3",    
+            "Feed me a Monster please...",
+            "I really hate the goldfish from Terraria."    
             "Find me if you can :3",
             "let me download your malware on my computer 🥺"
         ]
