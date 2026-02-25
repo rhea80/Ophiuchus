@@ -3,9 +3,13 @@ import random
 import math
 import time
 import ctypes
+import sys
+import os
 from PIL import Image, ImageTk
 
+
 class DesktopCat:
+
     def __init__(self):
         self.window = tk.Tk()
         self.window.overrideredirect(True)
@@ -13,8 +17,12 @@ class DesktopCat:
         self.window.config(bg="black")
         self.window.wm_attributes("-transparentcolor", "black")
 
-        self.load_gif("offensive/oathkeeper/assets/images/chococatfinal.gif")
-
+        def resource_path(relative_path):
+            if hasattr(sys, '_MEIPASS'):
+                return os.path.join(sys._MEIPASS, relative_path)
+            return os.path.join(os.path.abspath("."), relative_path)
+    
+        self.load_gif(resource_path("chococatfinal.gif"))
         self.bubble_width = 240
         self.bubble_padding = 14
         self.side_margin = 20
